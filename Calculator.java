@@ -1,30 +1,42 @@
 import java.util.Scanner;
 
 public class Calculator {
+
+    // Calculator methods
+    static double add(double a, double b) { return a + b; }
+    static double subtract(double a, double b) { return a - b; }
+    static double multiply(double a, double b) { return a * b; }
+    static double divide(double a, double b) {
+        if (b == 0) {
+            System.out.println("Error: Divide by zero!");
+            return 0;
+        }
+        return a / b;
+    }
+
+    // Main method
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean run = true;
-        while(run) {
-            System.out.println("Enter operation (+, -, *, /) or 'exit' to quit:");
-            String op = sc.next();
-            if(op.equalsIgnoreCase("exit")) break;
+        boolean exit = false;
 
-            System.out.print("Enter first number: ");
-            double a = sc.nextDouble();
-            System.out.print("Enter second number: ");
-            double b = sc.nextDouble();
+        while (!exit) {
+            System.out.println("\nEnter two numbers:");
+            double num1 = sc.nextDouble();
+            double num2 = sc.nextDouble();
+
+            System.out.println("Choose operation: + - * / or 0 to exit");
+            String op = sc.next();
 
             switch(op) {
-                case "+": System.out.println("Result: " + (a+b)); break;
-                case "-": System.out.println("Result: " + (a-b)); break;
-                case "*": System.out.println("Result: " + (a*b)); break;
-                case "/": 
-                    if(b != 0) System.out.println("Result: " + (a/b));
-                    else System.out.println("Cannot divide by zero");
-                    break;
-                default: System.out.println("Invalid operation");
+                case "+": System.out.println("Result: " + add(num1, num2)); break;
+                case "-": System.out.println("Result: " + subtract(num1, num2)); break;
+                case "*": System.out.println("Result: " + multiply(num1, num2)); break;
+                case "/": System.out.println("Result: " + divide(num1, num2)); break;
+                case "0": exit = true; System.out.println("Exiting..."); break;
+                default: System.out.println("Invalid operation!");
             }
         }
+
         sc.close();
     }
 }
